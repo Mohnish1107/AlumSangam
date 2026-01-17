@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-indigo-700 shadow-lg">
+    <header className="bg-gradient-to-r from-sky-600 to-indigo-700 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
           {/* Logo Section */}
           <div className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-white rounded-full">
-              <span className="text-blue-600 font-bold text-xl">A</span>
+            <div className="h-10 w-10 rounded-b-full">
+              <img className="rounded-4xl" src="logo.png" alt="" />
             </div>
             <h1 className="text-white text-2xl font-bold tracking-tight">
-              AlumniConnect
+              AlumnSangam
             </h1>
           </div>
 
