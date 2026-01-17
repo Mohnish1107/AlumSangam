@@ -41,12 +41,12 @@ const Login = () => {
     { value: 'admin', label: 'Administrator' }
   ]
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center p-4">
+    <div className="bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 flex items-center justify-center p-4">
       <div className="max-w-4xl w-full flex flex-col md:flex-row gap-8">
         
         {/* Left Side - Branding */}
-        <div className="md:w-1/2 text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="md:w-1/2 text-black m-5 bg-white rounded-2xl shadow-xl p-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 h-10 w-10">
             AlumniConnect
           </h1>
           <p className="text-xl mb-8 opacity-90">

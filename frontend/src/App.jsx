@@ -3,18 +3,19 @@ import Login from './pages/auth/Login'
 import AlumniDashboard from './pages/dashboard/AlumniDashboard'
 import StudentDashboard from './pages/dashboard/StudentDashboard'
 import Header from './components/layout/Header'
+import Registration from './pages/auth/registration'
 
 const App = ()=>{
   const isAuthenticated = true;
   const userRole = 'student'; 
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="">
       {isAuthenticated && <Header />}
       
       <Routes>
-        <Route path="/login" element={<Login />} />
-        
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/"/> :<Login />} />
+        <Route path="/register" element={<Registration />} />
         <Route 
           path="/dashboard" 
           element={
