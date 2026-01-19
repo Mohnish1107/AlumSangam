@@ -1,5 +1,5 @@
 import React from 'react'
-const Registration = () => {
+const Register = () => {
   const [role, setRole] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -134,4 +134,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Register;
