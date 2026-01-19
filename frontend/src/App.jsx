@@ -10,7 +10,7 @@ const App = ()=>{
   const userRole = 'student'; 
 
   return (
-    <div className="">
+    <div >
       {isAuthenticated && <Header />}
       
       <Routes>
