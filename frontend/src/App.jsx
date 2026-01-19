@@ -2,10 +2,10 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/auth/Login'
 import AlumniDashboard from './pages/dashboard/AlumniDashboard'
 import StudentDashboard from './pages/dashboard/StudentDashboard'
-import Header from './components/layout/Header'
+import Header from './components/Header'
 
 const App = ()=>{
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const userRole = 'student'; 
 
   return (
