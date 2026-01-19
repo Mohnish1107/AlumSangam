@@ -2,19 +2,24 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/auth/Login'
 import AlumniDashboard from './pages/dashboard/AlumniDashboard'
 import StudentDashboard from './pages/dashboard/StudentDashboard'
+<<<<<<< HEAD
 import Header from './components/Header'
+=======
+import Header from './components/layout/Header'
+import Registration from './pages/auth/registration'
+>>>>>>> 12838e0662922b894eddbffb1321974e66070aea
 
 const App = ()=>{
   const isAuthenticated = false;
   const userRole = 'student'; 
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="">
       {isAuthenticated && <Header />}
       
       <Routes>
-        <Route path="/login" element={<Login />} />
-        
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/"/> :<Login />} />
+        <Route path="/register" element={<Registration />} />
         <Route 
           path="/dashboard" 
           element={
