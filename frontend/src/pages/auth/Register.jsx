@@ -1,137 +1,162 @@
 import React,{useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 const Register = () => {
-  const [role, setRole] = useState(null);
-
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    contact: "",
-    linkedin: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+    role: 'alumni'
+  })
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    setLoading(true)
+    
+    // Simulate API call
+    setTimeout(() => {
+      console.log('Login attempt:', formData)
+      // Navigate based on role
+      if (formData.role === 'alumni') {
+        navigate('/dashboard')
+      } else if (formData.role === 'student') {
+        navigate('/dashboard')
+      } else {
+        navigate('/dashboard')
+      }
+      setLoading(false)
+    }, 1000)
+  }
 
-    const payload = {
-      role, // student | alumni
-      ...formData,
-    };
-
-    console.log(payload);
-  };
+  const roleOptions = [
+    { value: 'student', label: 'Student' },
+    { value: 'alumni', label: 'Alumni' },
+    { value: 'admin', label: 'Administrator' }
+  ]
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-
-        {/* OPTION SELECTION */}
-        {!role && (
-          <div className="space-y-4 text-center">
-            <h2 className="text-2xl font-bold">Register As</h2>
-
-            <button
-              onClick={() => setRole("student")}
-              className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700"
-            >
-              Student
-            </button>
-
-            <button
-              onClick={() => setRole("alumni")}
-              className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700"
-            >
-              Alumni
-            </button>
+  <div className="min-h-screen w-full bg-[url('https://images.pexels.com/photos/35665797/pexels-photo-35665797.jpeg')] bg-cover bg-center flex items-center justify-center p-4">
+    <div className="max-w-5xl w-full flex flex-col lg:flex-row shadow-xl rounded-2xl overflow-hidden">
+      
+      {/* Left Side - Solid Dark Blue */}
+      <div className="lg:w-1/2 bg-blue-950 text-white p-8 flex flex-col justify-center">
+        <div className="mb-8">
+          <div className="flex items-center mb-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-800 flex items-center justify-center mr-4">
+              <span className="text-2xl">🎓</span>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold">AlumniConnect</h1>
+              <p className="text-blue-200 mt-1">Where Graduates and Students Connect</p>
+            </div>
           </div>
-        )}
-
-        {/* REGISTRATION FORM */}
-        {role && (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <h2 className="text-xl font-bold text-center">
-              Register as {role === "alumni" ? "Alumni" : "Student"}
-            </h2>
-
-            <input
-              name="firstName"
-              placeholder="First Name"
-              onChange={handleChange}
-              required
-              className="w-full border-2 p-2 rounded"
-            />
-
-            <input
-              name="lastName"
-              placeholder="Last Name"
-              onChange={handleChange}
-              required
-              className="w-full border-2 p-2 rounded"
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-              required
-              className="w-full border-2 p-2 rounded"
-            />
-
-            <input
-              type="tel"
-              name="contact"
-              placeholder="Contact No."
-              onChange={handleChange}
-              required
-              className="w-full border-2 p-2 rounded"
-            />
-
-            {/* Alumni-specific field */}
-            {role === "alumni" && (
+        </div>
+        
+        <div className="space-y-4 mb-10">
+          {['Professional Networking', 'Mentorship Programs', 'Career Opportunities', 'Event Management', 'Alumni Directory'].map((feature, index) => (
+            <div key={index} className="flex items-center">
+              <div className="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center mr-4">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                </svg>
+              </div>
+              <span>{feature}</span>
+            </div>
+          ))}
+        </div>
+        
+        <p className="text-blue-300 text-sm">
+          Join thousands of alumni and students around the world.
+        </p>
+      </div>
+      
+      {/* Right Side - White */}
+      <div className="lg:w-1/2 bg-white/95 p-8 flex flex-col justify-center">
+        <div className="max-w-md mx-auto w-full">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome User</h2>
+          <p className="text-gray-600 mb-8">Sign up to your account</p>
+          
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Register yourself as</label>
+              <div className="grid grid-cols-3 gap-3">
+                {roleOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => setFormData({...formData, role: option.value})}
+                    className={`py-3 rounded-lg border font-medium ${
+                      formData.role === option.value 
+                        ? 'border-blue-500 bg-blue-50 text-blue-700' 
+                        : 'border-gray-200 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
               <input
-                type="url"
-                name="linkedin"
-                placeholder="LinkedIn Profile"
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                className="w-full border-2 p-2 rounded"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="you@example.com"
+                required
               />
-            )}
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              required
-              className="w-full border-2 p-2 rounded"
-            />
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            
+            <button 
+              type="submit" 
+              className="w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              disabled={loading}
             >
-              Register
+              {loading ? 'Signing in...' : 'Sign Up'}
             </button>
-
-            {/* Change option */}
-            <p
-              onClick={() => setRole(null)}
-              className="text-center text-sm text-blue-600 cursor-pointer"
-            >
-              ← Change registration type
-            </p>
+            
+            <div className="text-center space-y-2">
+              <p className="text-gray-600 text-sm">
+                Already have an account?{' '}
+                <Link to="/login" className="text-blue-600 font-medium hover:underline">
+                  Sign up
+                </Link>
+              </p>
+              <p className="text-sm">
+                <a href="#" className="text-gray-500 hover:text-blue-600 hover:underline">
+                  Forgot password?
+                </a>
+              </p>
+            </div>
           </form>
-        )}
-
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Register;
